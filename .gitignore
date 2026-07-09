@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environment
+.env
+
+# Data files that may be regenerated
+data/database/*.db
+
+# OS/editor
+.DS_Store
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
