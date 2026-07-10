@@ -19,3 +19,6 @@ data/database/*.db
 
 # Temporary files
 *.tmp
+# Large raw dataset
+data/raw/online_retail.xlsx
+data/raw/*.zip
