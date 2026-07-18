@@ -22,3 +22,13 @@ data/database/*.db
 # Large raw dataset
 data/raw/online_retail.xlsx
 data/raw/*.zip
+
+# Large generated cleaned datasets
+data/cleaned/online_retail_transactions_cleaned.csv
+reports/data_quality/data_quality_issues.csv
+
+# Local SQLite database files
+data/database/*.db
+data/database/*.sqlite
+data/database/*.sqlite3
+
