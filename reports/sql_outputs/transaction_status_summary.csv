@@ -1,0 +1,4 @@
+transaction_status,row_count,completed_sales_amount,cancelled_amount
+Completed,530104,10666684.54,0.0
+Cancelled/Return,10624,0.0,896812.49
+"Data Issue",1181,0.0,0.0
