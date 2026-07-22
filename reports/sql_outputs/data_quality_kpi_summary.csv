@@ -1,0 +1,2 @@
+total_transaction_lines,missing_customer_id_rows,missing_customer_id_rate_percent,duplicate_rows,duplicate_row_rate_percent,zero_or_negative_unit_price_rows,missing_description_rows,data_issue_rows,data_quality_issue_records
+541909,135080,24.93,10147,1.87,2517,1454,1181,169110
