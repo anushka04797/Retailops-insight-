@@ -16,7 +16,8 @@ SAMPLE_TRANSACTIONS_FILE = CLEANED_DIR / "online_retail_transactions_cleaned_sam
 PRODUCTS_FILE = CLEANED_DIR / "products_cleaned.csv"
 CUSTOMERS_FILE = CLEANED_DIR / "customers_cleaned.csv"
 
-DATA_QUALITY_ISSUES_FILE = REPORT_DIR / "data_quality_issues.csv"
+FULL_DATA_QUALITY_ISSUES_FILE = REPORT_DIR / "data_quality_issues.csv"
+SAMPLE_DATA_QUALITY_ISSUES_FILE = REPORT_DIR / "data_quality_issues_sample.csv"
 CLEANING_SUMMARY_FILE = REPORT_DIR / "cleaning_summary.csv"
 
 EXECUTIVE_KPI_FILE = SQL_OUTPUT_DIR / "executive_kpi_summary.csv"
@@ -130,8 +131,24 @@ def choose_transactions_file() -> tuple[Path, str]:
 
     return SAMPLE_TRANSACTIONS_FILE, "sample"
 
+def choose_data_quality_issues_file() -> tuple[Path, str]:
+    """
+    Choose which data quality issue file to validate.
 
-def check_required_files(results: list[dict[str, Any]], transactions_file: Path) -> None:
+    Preference:
+    1. Full local data quality issue file
+    2. GitHub-safe data quality issue sample file
+    """
+    if FULL_DATA_QUALITY_ISSUES_FILE.exists():
+        return FULL_DATA_QUALITY_ISSUES_FILE, "full"
+
+    return SAMPLE_DATA_QUALITY_ISSUES_FILE, "sample"
+
+def check_required_files(
+    results: list[dict[str, Any]],
+    transactions_file: Path,
+    data_quality_issues_file: Path,
+) -> None:
     """
     Validate that required project files exist.
     """
@@ -139,10 +156,10 @@ def check_required_files(results: list[dict[str, Any]], transactions_file: Path)
         transactions_file,
         PRODUCTS_FILE,
         CUSTOMERS_FILE,
-        DATA_QUALITY_ISSUES_FILE,
+        data_quality_issues_file,
         CLEANING_SUMMARY_FILE,
         EXECUTIVE_KPI_FILE,
-    ]
+   ]
 
     for file_path in required_files:
         if file_path.exists():
@@ -167,7 +184,10 @@ def check_required_files(results: list[dict[str, Any]], transactions_file: Path)
             )
 
 
-def load_data(transactions_file: Path) -> dict[str, pd.DataFrame]:
+def load_data(
+    transactions_file: Path,
+    data_quality_issues_file: Path,
+) -> dict[str, pd.DataFrame]:
     """
     Load the files required for validation.
     """
@@ -175,7 +195,7 @@ def load_data(transactions_file: Path) -> dict[str, pd.DataFrame]:
         "transactions": pd.read_csv(transactions_file),
         "products": pd.read_csv(PRODUCTS_FILE),
         "customers": pd.read_csv(CUSTOMERS_FILE),
-        "data_quality_issues": pd.read_csv(DATA_QUALITY_ISSUES_FILE),
+        "data_quality_issues": pd.read_csv(data_quality_issues_file),
         "cleaning_summary": pd.read_csv(CLEANING_SUMMARY_FILE),
         "executive_kpi": pd.read_csv(EXECUTIVE_KPI_FILE),
     }
@@ -783,11 +803,18 @@ def main() -> None:
     results: list[dict[str, Any]] = []
 
     transactions_file, transaction_scope = choose_transactions_file()
+    data_quality_issues_file, issue_log_scope = choose_data_quality_issues_file()
 
     print(f"Transaction file selected: {transactions_file}")
     print(f"Transaction validation scope: {transaction_scope}")
+    print(f"Data quality issue file selected: {data_quality_issues_file}")
+    print(f"Data quality issue validation scope: {issue_log_scope}")
 
-    check_required_files(results, transactions_file)
+    check_required_files(
+        results,
+        transactions_file,
+        data_quality_issues_file,
+    )
 
     has_critical_missing_file = any(
         result["status"] == "FAIL" and result["severity"] == "critical"
@@ -798,7 +825,9 @@ def main() -> None:
         save_validation_outputs(results)
         raise SystemExit("Validation failed because one or more critical files are missing.")
 
-    data = load_data(transactions_file)
+    data = load_data(
+    transactions_file,
+    data_quality_issues_file,)
 
     transactions = data["transactions"]
     products = data["products"]
