@@ -1,0 +1,3 @@
+status,severity,validation_count
+PASS,critical,14
+PASS,major,36

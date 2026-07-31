@@ -1,0 +1,51 @@
+validation_name,status,severity,expected,actual,notes
+Required file exists: data/cleaned/online_retail_transactions_cleaned.csv,PASS,critical,file exists,file exists,Required file is available.
+Required file exists: data/cleaned/products_cleaned.csv,PASS,critical,file exists,file exists,Required file is available.
+Required file exists: data/cleaned/customers_cleaned.csv,PASS,critical,file exists,file exists,Required file is available.
+Required file exists: reports/data_quality/data_quality_issues.csv,PASS,critical,file exists,file exists,Required file is available.
+Required file exists: reports/data_quality/cleaning_summary.csv,PASS,critical,file exists,file exists,Required file is available.
+Required file exists: reports/sql_outputs/executive_kpi_summary.csv,PASS,critical,file exists,file exists,Required file is available.
+Transaction table contains expected columns,PASS,critical,27 required columns,27 columns found,All required transaction columns are present.
+Transaction status values are controlled,PASS,critical,"['Cancelled/Return', 'Completed', 'Data Issue']","['Cancelled/Return', 'Completed', 'Data Issue']",All transaction status values are expected.
+raw_row_id is complete and unique,PASS,critical,0 nulls and 0 duplicates,"0 nulls, 0 duplicates",Each transaction row has a unique traceable raw row ID.
+line_revenue equals quantity multiplied by unit_price,PASS,critical,0 mismatches,0,line_revenue calculation is consistent.
+completed_sales_amount follows transaction status logic,PASS,critical,completed rows equal line_revenue; non-completed rows equal 0,0 mismatches,completed_sales_amount is consistent with reporting logic.
+cancelled_amount follows transaction status logic,PASS,critical,cancelled rows equal absolute line_revenue; non-cancelled rows equal 0,0 mismatches,cancelled_amount is consistent with reporting logic.
+Reporting amount fields are non-negative,PASS,critical,0 negative reporting amounts,0 negative reporting amounts,completed_sales_amount and cancelled_amount are non-negative.
+is_missing_customer_id flag matches customer_id,PASS,critical,0 mismatches,0,Missing customer ID flag is consistent.
+is_missing_description flag matches description,PASS,major,0 mismatches,0,Missing description flag is consistent.
+Product table has unique stock_code values,PASS,major,0 duplicate stock_code values,0,Product table has one row per stock code.
+Customer table has unique customer_id values,PASS,major,0 duplicate customer_id values,0,Customer table has one row per known customer ID.
+Cleaning summary matches actual data: raw_rows,PASS,major,541909.0,541909,Value matches expected result.
+Cleaning summary matches actual data: cleaned_transaction_rows,PASS,major,541909.0,541909,Value matches expected result.
+Cleaning summary matches actual data: completed_rows,PASS,major,530104.0,530104,Value matches expected result.
+Cleaning summary matches actual data: cancelled_return_rows,PASS,major,10624.0,10624,Value matches expected result.
+Cleaning summary matches actual data: data_issue_rows,PASS,major,1181.0,1181,Value matches expected result.
+Cleaning summary matches actual data: missing_customer_id_rows,PASS,major,135080.0,135080,Value matches expected result.
+Cleaning summary matches actual data: duplicate_rows,PASS,major,10147.0,10147,Value matches expected result.
+Cleaning summary matches actual data: zero_or_negative_unit_price_rows,PASS,major,2517.0,2517,Value matches expected result.
+Cleaning summary matches actual data: unique_invoice_count,PASS,major,25900.0,25900,Value matches expected result.
+Cleaning summary matches actual data: unique_product_count,PASS,major,4070.0,4070,Value matches expected result.
+Cleaning summary matches actual data: known_customer_count,PASS,major,4372.0,4372,Value matches expected result.
+Cleaning summary matches actual data: country_count,PASS,major,38.0,38,Value matches expected result.
+Cleaning summary matches actual data: data_quality_issue_records,PASS,major,169110.0,169110,Value matches expected result.
+Cleaning summary matches actual data: total_completed_sales_amount,PASS,major,10666684.54,10666684.54,Value matches expected result.
+Cleaning summary matches actual data: total_cancelled_amount,PASS,major,896812.49,896812.49,Value matches expected result.
+Executive KPI matches actual data: total_transaction_lines,PASS,major,541909.0,541909,Value matches expected result.
+Executive KPI matches actual data: completed_transaction_lines,PASS,major,530104.0,530104,Value matches expected result.
+Executive KPI matches actual data: cancelled_return_lines,PASS,major,10624.0,10624,Value matches expected result.
+Executive KPI matches actual data: data_issue_lines,PASS,major,1181.0,1181,Value matches expected result.
+Executive KPI matches actual data: completed_invoice_count,PASS,major,19960.0,19960,Value matches expected result.
+Executive KPI matches actual data: total_completed_sales_amount,PASS,major,10666684.54,10666684.54,Value matches expected result.
+Executive KPI matches actual data: total_cancelled_amount,PASS,major,896812.49,896812.49,Value matches expected result.
+Executive KPI matches actual data: net_sales_after_cancellations,PASS,major,9769872.05,9769872.05,Value matches expected result.
+Executive KPI matches actual data: average_order_value,PASS,major,534.4,534.4,Value matches expected result.
+Executive KPI matches actual data: average_completed_line_value,PASS,major,20.12,20.12,Value matches expected result.
+Executive KPI matches actual data: cancellation_amount_rate_percent,PASS,major,7.76,7.76,Value matches expected result.
+Executive KPI matches actual data: unique_product_count,PASS,major,4070.0,4070,Value matches expected result.
+Executive KPI matches actual data: known_customer_count,PASS,major,4372.0,4372,Value matches expected result.
+Executive KPI matches actual data: country_count,PASS,major,38.0,38,Value matches expected result.
+Executive KPI matches actual data: missing_customer_id_rows,PASS,major,135080.0,135080,Value matches expected result.
+Executive KPI matches actual data: missing_customer_id_rate_percent,PASS,major,24.93,24.93,Value matches expected result.
+Executive KPI matches actual data: duplicate_rows,PASS,major,10147.0,10147,Value matches expected result.
+Executive KPI matches actual data: duplicate_row_rate_percent,PASS,major,1.87,1.87,Value matches expected result.
