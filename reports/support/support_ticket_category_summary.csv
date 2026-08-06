@@ -1,0 +1,7 @@
+category,ticket_count,high_priority_count,affected_reports
+Data Quality,1,1,1
+Reporting Mismatch,1,1,1
+Revenue Logic,1,1,1
+Dashboard Data Trust,1,0,1
+Data Quality Monitoring,1,0,1
+Invalid Pricing,1,0,1
