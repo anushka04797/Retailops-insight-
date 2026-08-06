@@ -1,0 +1,2 @@
+ticket_id,category,affected_report,issue_summary,is_duplicate_row,row_count,completed_sales_amount
+RPT-003,"Dashboard Data Trust","Product Sales Dashboard","Some transaction lines appear duplicated in reporting extracts.",1,10147,47388.66

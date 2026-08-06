@@ -1,0 +1,2 @@
+ticket_id,category,affected_report,issue_summary,total_completed_sales_amount,total_cancelled_amount,net_sales_after_cancellations,recalculated_net_sales,investigation_result
+RPT-001,"Reporting Mismatch","Executive Sales KPI Summary","Dashboard net sales does not match the completed sales figure shown in the monthly report.",10666684.54,896812.49,9769872.05,9769872.05,"Net sales matches completed sales minus cancelled amount"

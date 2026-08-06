@@ -1,0 +1,2 @@
+ticket_id,category,affected_report,issue_summary,missing_customer_id_rows,missing_customer_id_rate_percent,customer_id_status,transaction_lines,completed_sales_amount
+RPT-002,"Data Quality","Customer Sales Segmentation","Customer-level sales report is missing a large number of transaction rows.",135080,24.93,"Missing Customer ID",135080,1755276.64

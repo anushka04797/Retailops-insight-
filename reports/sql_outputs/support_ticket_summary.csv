@@ -1,0 +1,7 @@
+category,priority,ticket_count
+"Revenue Logic",High,1
+"Reporting Mismatch",High,1
+"Data Quality",High,1
+"Invalid Pricing",Medium,1
+"Data Quality Monitoring",Medium,1
+"Dashboard Data Trust",Medium,1

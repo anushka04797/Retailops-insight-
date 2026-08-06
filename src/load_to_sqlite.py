@@ -11,7 +11,7 @@ PRODUCTS_FILE = Path("data/cleaned/products_cleaned.csv")
 CUSTOMERS_FILE = Path("data/cleaned/customers_cleaned.csv")
 DATA_QUALITY_ISSUES_FILE = Path("reports/data_quality/data_quality_issues.csv")
 CLEANING_SUMMARY_FILE = Path("reports/data_quality/cleaning_summary.csv")
-
+SUPPORT_TICKETS_FILE = Path("data/support/reporting_support_tickets.csv")
 
 def ensure_database_directory() -> None:
     """
@@ -30,6 +30,7 @@ def check_required_files() -> None:
         CUSTOMERS_FILE,
         DATA_QUALITY_ISSUES_FILE,
         CLEANING_SUMMARY_FILE,
+        SUPPORT_TICKETS_FILE,
     ]
 
     missing_files = [str(file) for file in required_files if not file.exists()]
@@ -160,6 +161,18 @@ def create_indexes(connection: sqlite3.Connection) -> None:
         CREATE INDEX IF NOT EXISTS idx_data_quality_issue_type
         ON data_quality_issues(issue_type);
         """,
+                """
+        CREATE INDEX IF NOT EXISTS idx_support_tickets_ticket_id
+        ON support_tickets(ticket_id);
+        """,
+        """
+        CREATE INDEX IF NOT EXISTS idx_support_tickets_category
+        ON support_tickets(category);
+        """,
+        """
+        CREATE INDEX IF NOT EXISTS idx_support_tickets_priority
+        ON support_tickets(priority);
+        """,
     ]
 
     cursor = connection.cursor()
@@ -184,6 +197,7 @@ def verify_loaded_tables(connection: sqlite3.Connection) -> pd.DataFrame:
         "customers",
         "data_quality_issues",
         "cleaning_summary",
+        "support_tickets",
     ]
 
     verification_results = []
@@ -262,6 +276,11 @@ def main() -> None:
             connection=connection,
             csv_path=CLEANING_SUMMARY_FILE,
             table_name="cleaning_summary"
+        )
+        load_small_csv(
+            connection=connection,
+            csv_path=SUPPORT_TICKETS_FILE,
+            table_name="support_tickets"
         )
 
         create_indexes(connection)

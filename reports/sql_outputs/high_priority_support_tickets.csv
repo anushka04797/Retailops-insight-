@@ -1,0 +1,4 @@
+ticket_id,category,priority,affected_report,issue_summary,linked_metric,current_status
+RPT-001,"Reporting Mismatch",High,"Executive Sales KPI Summary","Dashboard net sales does not match the completed sales figure shown in the monthly report.",net_sales_after_cancellations,Investigated
+RPT-002,"Data Quality",High,"Customer Sales Segmentation","Customer-level sales report is missing a large number of transaction rows.",missing_customer_id_rate_percent,Investigated
+RPT-004,"Revenue Logic",High,"Revenue Summary","Cancelled/return values need to be explained separately from completed sales.",total_cancelled_amount,Investigated
